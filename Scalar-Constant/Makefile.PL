@@ -8,6 +8,7 @@ name           'Scalar-Constant';
 all_from       'lib/Scalar/Constant.pm';
 
 # Specific dependencies
+requires       'Scalar::Quote'  => '0.26';
 test_requires  'Test::More'  => '0.42';
 
 WriteAll;
