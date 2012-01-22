@@ -1,15 +1,19 @@
-use Test::More tests => 3;
+use Test::More tests => 5;
 use strict;
 use warnings;
 
 use Scalar::Constant
     PI => 3.1415926535,
-    C  => 299_792_458;
+    C  => 299_792_458,
+    HI => 'hello "',
+    HIJACK => "hello jack o' neill",
+    ;
 
 is($PI, 3.1415926535, 'pi was set');
 is($C,  299_792_458,  'c was set');
+is($HI, 'hello "',  'hi was set');
+is($HIJACK, "hello jack o' neill",  'hijack was set');
 
-diag("pi is $PI, and c is $C m/s");  
 eval {
     $PI = 0;
 };

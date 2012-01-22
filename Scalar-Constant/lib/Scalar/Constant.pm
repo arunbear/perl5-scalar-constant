@@ -2,9 +2,11 @@ package Scalar::Constant;
 
 use strict;
 use Carp;
+use Scalar::Quote 'quote';
+use Scalar::Util qw(looks_like_number);
 
 use vars qw( $VERSION );
-$VERSION = 0.001_002;
+$VERSION = 0.001_003;
 
 
 sub import {
@@ -15,6 +17,9 @@ sub import {
     my $calling_package = (caller)[0];
     my @code;
     while(my($name, $value) = each %constant) {
+        if(! looks_like_number($value)) {
+            $value = quote($value);
+        }
         push @code, sprintf('*%s::%s = \ %s;', $calling_package, $name, $value);
     } 
 
@@ -53,7 +58,7 @@ Scalar::Constant requires no configuration files or environment variables.
 
 =head1 DEPENDENCIES
 
-None.
+L<Scalar::Quote>
 
 
 =head1 INCOMPATIBILITIES
@@ -63,11 +68,8 @@ None reported.
 
 =head1 BUGS AND LIMITATIONS
 
-No bugs have been reported.
-
-Please report any bugs or feature requests to
-C<bug-const@rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org>.
+Please report any bugs or feature requests through
+the GitHub web interface at L<https://github.com/arunbear/perl5-scalar-constant/issues>.
 
 
 =head1 AUTHOR
