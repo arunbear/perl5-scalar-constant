@@ -1,5 +1,8 @@
 Revision history for Scalar::Constant 
 
+0.001.004  Sun Jan  29 2012
+       Fixed https://rt.cpan.org/Public/Bug/Display.html?id=74485
+
 0.001.003  Sun Jan  22 2012
        Fixed https://rt.cpan.org/Public/Bug/Display.html?id=73488
 

@@ -6,7 +6,7 @@ use Scalar::Quote 'quote';
 use Scalar::Util qw(looks_like_number);
 
 use vars qw( $VERSION );
-$VERSION = 0.001_003;
+$VERSION = 0.001_004;
 
 
 sub import {
@@ -17,6 +17,9 @@ sub import {
     my $calling_package = (caller)[0];
     my @code;
     while(my($name, $value) = each %constant) {
+        if(ref($value)) {
+            croak 'References are not supported';
+        }
         if(! looks_like_number($value)) {
             $value = quote($value);
         }
@@ -40,7 +43,8 @@ Scalar::Constant - lightweight constant scalars.
 
     use Scalar::Constant
         PI => 3.1415926535,
-        C  => 299_792_458;
+        C  => 299_792_458,
+        HI => 'hello world';
 
     print "pi is $PI, and c is $C m/s\n";  
 
@@ -67,6 +71,9 @@ None reported.
 
 
 =head1 BUGS AND LIMITATIONS
+
+Only simple scalars i.e. numbers and strings are supported. Attempting to
+define a constant with a reference value will result in an exception (compilation will be aborted).
 
 Please report any bugs or feature requests through
 the GitHub web interface at L<https://github.com/arunbear/perl5-scalar-constant/issues>.
