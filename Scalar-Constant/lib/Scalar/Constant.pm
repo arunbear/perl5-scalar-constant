@@ -6,7 +6,7 @@ use Scalar::Quote 'quote';
 use Scalar::Util qw(looks_like_number);
 
 use vars qw( $VERSION );
-$VERSION = 0.001_004;
+$VERSION = 0.001_005;
 
 
 sub import {
